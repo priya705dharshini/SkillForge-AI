@@ -1,0 +1,26 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Chat History</title>
+  </head>
+  <body>
+    <h1>Chat History</h1>
+    <a href="/chat">Back to Chat</a>
+    <div>
+      {% if chats %}
+        <ul>
+        {% for c in chats %}
+          <li style="margin-bottom:12px;">
+            <div><strong>When:</strong> {{ c['created_at'] }}</div>
+            <div><strong>User:</strong> {{ c['message'] }}</div>
+            <div><strong>AI:</strong> {{ c['response'] }}</div>
+          </li>
+        {% endfor %}
+        </ul>
+      {% else %}
+        <div>No chat history found.</div>
+      {% endif %}
+    </div>
+  </body>
+</html>
