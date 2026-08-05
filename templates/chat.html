@@ -1,50 +1,520 @@
 <!doctype html>
 <html>
-  <head>
+<head>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>SkillForge AI - Chat</title>
-  </head>
-  <body>
-    <h1>SkillForge AI - Chat</h1>
-    <a href="/chat-history">View Chat History</a>
 
-    <div id="chat-box">
-      {% for c in chats %}
-        <div style="margin-bottom:10px;">
-          <strong>You:</strong> {{ c['message'] }}<br>
-          <strong>AI:</strong> {{ c['response'] }}<br>
-          <small>{{ c['created_at'] }}</small>
-        </div>
-      {% else %}
-        <div>No messages yet.</div>
-      {% endfor %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+
+<body>
+
+
+<header class="top-nav">
+
+    <div class="brand">
+        SkillForge AI
     </div>
 
-    <form id="chat-form">
-      <input type="hidden" id="user_id" value="{{ user_id }}">
-      <input id="message" placeholder="Type your message" style="width:60%" />
-      <button type="submit">Send</button>
-    </form>
 
-    <script>
-      const form = document.getElementById('chat-form');
-      form.addEventListener('submit', async (e) => {
-        e.preventDefault();
-        const user_id = document.getElementById('user_id').value;
-        const message = document.getElementById('message').value;
-        if (!message) return;
-        const res = await fetch('/api/chat', {
-          method: 'POST',
-          headers: {'Content-Type': 'application/json'},
-          body: JSON.stringify({user_id, message})
-        });
-        const data = await res.json();
-        // append to chat box
-        const div = document.createElement('div');
-        div.innerHTML = `<strong>You:</strong> ${message}<br><strong>AI:</strong> ${data.response}<br><small>just now</small>`;
-        document.getElementById('chat-box').prepend(div);
-        document.getElementById('message').value = '';
-      });
-    </script>
-  </body>
+    <nav class="nav-links">
+
+        <a href="/">Home</a>
+        <a href="/profile">Profile</a>
+        <a href="/dashboard">Dashboard</a>
+        <a class="active" href="/chat">Chat</a>
+        <a href="/chat-history">Chat History</a>
+
+    </nav>
+
+</header>
+
+
+
+
+
+<main class="container">
+
+
+<section class="sidebar">
+
+
+<div class="card agents">
+
+<h3>AI Agents</h3>
+
+
+<ul class="agent-list">
+
+<li class="agent-item">
+Career Analysis Agent
+</li>
+
+<li class="agent-item">
+Skill Gap Detection Agent
+</li>
+
+<li class="agent-item">
+Roadmap Generation Agent
+</li>
+
+<li class="agent-item">
+Project Recommendation Agent
+</li>
+
+<li class="agent-item">
+Memory Assistant Agent
+</li>
+
+
+</ul>
+
+
+</div>
+
+
+
+
+
+<div class="card quick-actions">
+
+
+<h4>Quick Actions</h4>
+
+
+<button class="btn"
+onclick="sendQuick('Analyze my career path')">
+
+Start Career Analysis
+
+</button>
+
+
+
+<button class="btn ghost"
+onclick="sendQuick('Generate a learning roadmap for me')">
+
+Generate Roadmap
+
+</button>
+
+
+
+</div>
+
+
+</section>
+
+
+
+
+
+
+
+<section class="chat-panel">
+
+
+<div class="card chat-card">
+
+
+
+<div class="chat-header">
+
+
+<div class="title">
+AI Career Assistant
+</div>
+
+
+<div class="sub">
+Ask about careers, skills and projects
+</div>
+
+
+</div>
+
+
+
+
+
+<div id="chat-box" class="chat-box">
+
+
+
+{% for c in chats %}
+
+
+
+<div class="message-row">
+
+
+<div class="bubble user-message">
+
+
+<div class="meta">
+You • <small>{{ c['created_at'] }}</small>
+</div>
+
+
+<div class="text">
+{{ c['message'] }}
+</div>
+
+
+</div>
+
+
+</div>
+
+
+
+
+
+<div class="message-row">
+
+
+<div class="bubble ai-message">
+
+
+<div class="meta">
+AI • <small>{{ c['created_at'] }}</small>
+</div>
+
+
+<div class="text">
+{{ c['response'] }}
+</div>
+
+
+</div>
+
+
+</div>
+
+
+
+
+{% else %}
+
+
+
+<div class="empty-state">
+
+No messages yet — start your career conversation.
+
+</div>
+
+
+
+{% endfor %}
+
+
+
+
+</div>
+
+
+
+
+
+
+
+<form id="chat-form" class="chat-form">
+
+
+<input 
+type="hidden"
+id="user_id"
+value="{{ user_id }}"
+>
+
+
+
+<input 
+
+id="message"
+
+class="input"
+
+type="text"
+
+placeholder="Type your career question..."
+
+autocomplete="off"
+
+required
+
+>
+
+
+
+<button type="submit" class="btn primary">
+
+Send
+
+</button>
+
+
+</form>
+
+
+
+
+
+</div>
+
+
+</section>
+
+
+</main>
+
+
+
+
+
+
+<footer class="footer">
+
+
+<div>
+© 2026 SkillForge AI
+</div>
+
+
+
+<div class="footer-links">
+
+
+<a href="#">
+Privacy
+</a>
+
+
+<a href="#">
+Terms
+</a>
+
+
+</div>
+
+
+
+</footer>
+
+
+
+
+
+
+
+
+<script>
+
+
+
+const form = document.getElementById('chat-form');
+
+
+
+form.addEventListener('submit', async (e)=>{
+
+
+e.preventDefault();
+
+
+
+const user_id =
+document.getElementById('user_id').value;
+
+
+
+const message =
+document.getElementById('message').value;
+
+
+
+if(!message.trim()) return;
+
+
+
+
+
+const res = await fetch('/api/chat',{
+
+
+method:'POST',
+
+
+headers:{
+
+
+'Content-Type':'application/json'
+
+
+},
+
+
+
+body:JSON.stringify({
+
+user_id:user_id,
+
+message:message
+
+})
+
+
+});
+
+
+
+
+
+const data = await res.json();
+
+
+
+
+const chatBox =
+document.getElementById('chat-box');
+
+
+
+
+
+
+const userRow =
+document.createElement('div');
+
+
+
+userRow.className="message-row";
+
+
+
+userRow.innerHTML=`
+
+<div class="bubble user-message">
+
+<div class="meta">
+You • <small>just now</small>
+</div>
+
+<div class="text">
+${escapeHtml(message)}
+</div>
+
+</div>
+
+`;
+
+
+
+
+
+
+
+const aiRow =
+document.createElement('div');
+
+
+
+aiRow.className="message-row";
+
+
+
+aiRow.innerHTML=`
+
+<div class="bubble ai-message">
+
+<div class="meta">
+AI • <small>just now</small>
+</div>
+
+<div class="text">
+${escapeHtml(data.response)}
+</div>
+
+
+</div>
+
+`;
+
+
+
+
+
+
+chatBox.appendChild(userRow);
+
+
+chatBox.appendChild(aiRow);
+
+
+
+chatBox.scrollTop =
+chatBox.scrollHeight;
+
+
+
+document.getElementById('message').value="";
+
+
+
+});
+
+
+
+
+
+
+
+
+function sendQuick(text){
+
+
+document.getElementById('message').value=text;
+
+
+document.getElementById('chat-form')
+.dispatchEvent(new Event('submit'));
+
+}
+
+
+
+
+
+
+
+
+function escapeHtml(unsafe){
+
+
+return unsafe
+
+.replace(/&/g,"&amp;")
+
+.replace(/</g,"&lt;")
+
+.replace(/>/g,"&gt;")
+
+.replace(/"/g,"&quot;")
+
+.replace(/'/g,"&#039;");
+
+
+}
+
+
+
+
+</script>
+
+
+
+</body>
 </html>

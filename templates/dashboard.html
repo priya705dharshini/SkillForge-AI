@@ -1,0 +1,316 @@
+<!doctype html>
+<html>
+
+<head>
+
+    <meta charset="utf-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Dashboard - SkillForge AI</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+
+<body>
+
+
+<header class="top-nav">
+
+    <div class="brand">
+        SkillForge AI
+    </div>
+
+
+    <nav class="nav-links">
+
+        <a href="/">Home</a>
+
+        <a href="/profile">Profile</a>
+
+        <a class="active" href="/dashboard">Dashboard</a>
+
+        <a href="/chat">Chat</a>
+
+        <a href="/chat-history">Chat History</a>
+
+    </nav>
+
+
+</header>
+
+
+
+
+
+<main class="container">
+
+
+
+<section class="sidebar">
+
+
+<div class="card">
+
+
+<h3>
+Welcome
+</h3>
+
+
+<p class="muted">
+
+Use the agents to analyze careers, detect skill gaps, and generate roadmaps.
+
+</p>
+
+
+
+<div style="margin-top:12px">
+
+
+<a class="btn" href="/profile">
+
+View Profile
+
+</a>
+
+
+
+<a class="btn primary" href="/chat?user_id={{ user_id }}">
+
+Open Chat
+
+</a>
+
+
+</div>
+
+
+</div>
+
+
+</section>
+
+
+
+
+
+
+
+<section class="chat-panel">
+
+
+<div class="card">
+
+
+<h2>
+AI Agents
+</h2>
+
+
+
+
+<div class="stats-grid" style="margin-top:14px">
+
+
+
+
+
+<div class="card">
+
+<h4>
+Career Analysis Agent
+</h4>
+
+
+<p class="muted">
+
+Get personalized career recommendations and next steps.
+
+</p>
+
+
+<div style="margin-top:10px">
+
+<a class="btn primary" href="/chat?user_id={{ user_id }}">
+
+Chat
+
+</a>
+
+</div>
+
+
+</div>
+
+
+
+
+
+
+<div class="card">
+
+<h4>
+Skill Gap Detection Agent
+</h4>
+
+
+<p class="muted">
+
+Identify missing skills and learning priorities.
+
+</p>
+
+
+<div style="margin-top:10px">
+
+<a class="btn primary" href="/chat?user_id={{ user_id }}">
+
+Chat
+
+</a>
+
+</div>
+
+
+</div>
+
+
+
+
+
+
+<div class="card">
+
+<h4>
+Roadmap Generation Agent
+</h4>
+
+
+<p class="muted">
+
+Generate step-by-step learning roadmaps.
+
+</p>
+
+
+<div style="margin-top:10px">
+
+<a class="btn primary" href="/chat?user_id={{ user_id }}">
+
+Chat
+
+</a>
+
+</div>
+
+
+</div>
+
+
+
+
+
+
+
+<div class="card">
+
+<h4>
+Project Recommendation Agent
+</h4>
+
+
+<p class="muted">
+
+Suggest projects tailored to your goals and skills.
+
+</p>
+
+
+<div style="margin-top:10px">
+
+<a class="btn primary" href="/chat?user_id={{ user_id }}">
+
+Chat
+
+</a>
+
+</div>
+
+
+</div>
+
+
+
+
+
+
+
+<div class="card">
+
+<h4>
+Memory Assistant Agent
+</h4>
+
+
+<p class="muted">
+
+Manage persistent notes and recall user context.
+
+</p>
+
+
+<div style="margin-top:10px">
+
+<a class="btn primary" href="/chat?user_id={{ user_id }}">
+
+Chat
+
+</a>
+
+</div>
+
+
+</div>
+
+
+
+
+
+
+</div>
+
+
+</div>
+
+
+</section>
+
+
+
+</main>
+
+
+
+
+
+
+<footer class="footer">
+
+
+<div>
+© 2026 SkillForge AI
+</div>
+
+
+</footer>
+
+
+
+
+</body>
+
+</html>
