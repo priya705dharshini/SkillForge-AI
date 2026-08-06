@@ -154,38 +154,102 @@ def chat():
 
 
 
-def generate_ai_response(user,message):
+def generate_ai_response(user, message):
+
+    name = user['name'] if user else "User"
+    skills = user['skills'] if user else ""
+    career = user['career_goal'] if user else ""
+    interests = user['interests'] if user else ""
+
+    msg = message.lower()
 
 
-    name=user['name'] if user else "User"
-
-    skills=user['skills'] if user else ""
-
-    career=user['career_goal'] if user else ""
-
-    interests=user['interests'] if user else ""
-
-
-
-    msg=message.lower()
-
-
-
-    if "project" in msg:
+    if "python" in msg and "roadmap" in msg:
 
         return f"""
-{name}, based on your skills ({skills}), 
-I recommend these projects:
+🐍 {name}, Python Learning Roadmap:
+
+Beginner Level:
+✅ Python Syntax
+✅ Variables and Data Types
+✅ Operators
+✅ Input and Output
+✅ If-Else Conditions
+✅ Loops
+✅ Functions
+✅ Basic Programs
+
+
+Intermediate Level:
+✅ Lists
+✅ Tuples
+✅ Sets
+✅ Dictionaries
+✅ String Manipulation
+✅ File Handling
+✅ Exception Handling
+✅ OOP Concepts
+
+
+Advanced Level:
+✅ Modules and Packages
+✅ Virtual Environment
+✅ NumPy
+✅ Pandas
+✅ Matplotlib
+✅ SQL
+✅ SQLite
+✅ Flask
+✅ APIs
+
+
+Projects:
+1. Calculator Application
+2. To-Do List App
+3. Weather App using API
+4. Flask Portfolio Website
+5. Machine Learning Prediction Project
+
+
+Career Preparation:
+✅ Data Structures and Algorithms
+✅ Git & GitHub
+✅ LeetCode Practice
+✅ Real World Projects
+"""
+
+
+    elif "python" in msg:
+
+        return f"""
+{name}, Python Learning Path:
+
+1. Learn Python Basics
+2. Practice Data Structures
+3. Learn OOP Concepts
+4. Learn Libraries
+5. Build Projects
+6. Learn Flask/Django
+7. Explore AI and Machine Learning
+"""
+
+
+    elif "project" in msg:
+
+        return f"""
+{name}, based on your skills:
+
+{skills}
+
+Recommended Projects:
 
 1. AI Career Assistant using Flask
 2. Machine Learning Prediction System
 3. Full Stack Portfolio Application
 4. Data Analysis Dashboard
 
-These projects will improve your {career} profile.
+These projects improve your {career} profile.
 """
-
-
 
 
     elif "roadmap" in msg:
@@ -194,59 +258,56 @@ These projects will improve your {career} profile.
 {name}, your {career} roadmap:
 
 Step 1:
-Strengthen Java, Python and DSA
+Strengthen Programming + DSA
 
 Step 2:
 Learn Web Development
 (HTML, CSS, JavaScript, React)
 
 Step 3:
-Build AI and Full Stack projects
+Build AI and Full Stack Projects
 
 Step 4:
-Practice coding interviews and system design.
+Practice Coding Interviews
 """
-
-
 
 
     elif "skill" in msg or "gap" in msg:
 
         return f"""
-{name}, skill gap analysis:
+{name}, Skill Gap Analysis:
 
-Current skills:
+Current Skills:
 {skills}
 
-Recommended improvements:
+Improve:
 
 - Advanced DSA
 - Backend Development
 - Cloud Basics
-- AI/ML deployment
-- Communication skills
+- AI/ML Deployment
+- Communication Skills
 """
-
-
 
 
     elif "career" in msg:
 
         return f"""
-{name}, your career goal is {career}.
+{name}, your career goal:
 
-Based on your interests:
+{career}
+
+Interests:
+
 {interests}
 
-Recommended roles:
+Recommended Roles:
 
 - Software Engineer
 - AI Engineer
 - Full Stack Developer
 - Data Engineer
 """
-
-
 
 
     else:
@@ -264,10 +325,6 @@ I can help you with:
 • Project recommendations
 • Interview preparation
 """
-
-
-
-
 
 
 
